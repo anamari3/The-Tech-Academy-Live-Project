@@ -1,0 +1,9 @@
+<div class="details-container">
+    <div class="tab-div">
+        <ul class="nav nav-tabs">
+            <li class="active view-details"><a data-toggle="tab" href="#admin-view-details">Details <span id="editDetailsIcon" onclick="loadDetails('@Model.Id', '@Model.FirstName', '@Model.LastName', true)"><i class="fa fa-pencil-square-o"></i></span></a></li>
+            <li class="view-details"><a data-toggle="tab" onclick="showCalendar('@Model.Id')" href="#admin-view-calendar">Hours Worked <i class="fa fa-pencil-square-o"></i></a></li>
+            <li class="view-details"><a data-toggle="tab" onclick="showCalendar('@Model.Id', 'schedule')" href="#admin-view-calendar">Schedule <i class="fa fa-pencil-square-o"></i></a></li>
+            <li class="view-details"><a data-toggle="tab" onclick="showDeleteAndBlock('@Model.Id', '@Model.CurrentRole')" href="#admin-view-toggles">Access Level</a></li>
+        </ul>
+    </div>

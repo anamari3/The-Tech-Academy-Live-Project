@@ -1,0 +1,79 @@
+@model ScheduleUsers.ViewModels.EventListVm
+
+@*@{
+    /**/
+
+    ViewBag.Title = "Index";
+    string demo = "demo";
+}*@
+
+
+    <table class="table" style="margin-left:10px">
+        <tr>
+            @*SORT ORDER COLUMN HEADINGS*@
+            <th>
+                <button style="margin-right:2px" value="@ViewBag.DateSortParm" name="DateFilterSort" type="submit">
+                    Shift Start Date
+                </button>
+            </th>
+            <th>
+                <button value="@ViewBag.DateSortParm" name="DateFilterSort" type="submit">
+                    Shift End Date
+                </button>
+            </th>
+
+            <th>
+                <button value="@ViewBag.HoursSortParm" name="HoursSorter" type="submit">
+                    Total Hours
+                </button>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventVms.First().EventNote)
+            </th>
+
+            <th>Edit</th>
+
+        </tr>
+
+
+        @for (int i = 0; i < Model.EventVms.Count; i++)
+        {
+            <tr>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => Model.EventVms[i].EventTimeIn)
+                </td>
+                <td class="col-md-2">
+                    @Html.DisplayFor(modelItem => Model.EventVms[i].EventTimeOut)
+                </td>
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => Model.EventVms[i].EventHoursWorked)
+                </td>
+                <td class="col-md-5">
+                    @Html.DisplayFor(modelItem => Model.EventVms[i].EventNote)
+                </td>
+                <td class="col-md-1 offset-md-5 ">
+                    <input type="button" onclick='userEditModal("@Model.EventVms[i].Id")' value="Edit" />
+                </td>
+            </tr>
+        }
+    </table>
+
+
+@*Modal for Shift Edit*@
+<th>
+    <div class="modal" id="MyModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Edit Shift</h2>
+                </div>
+                <div class="modal-body" id="userEditModalBody">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</th>

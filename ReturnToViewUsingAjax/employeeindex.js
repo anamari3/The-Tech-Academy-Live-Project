@@ -1,3 +1,30 @@
+function deleteStopUser(url) {
+    var user = $('#UserName').val();
+    var pass = $('#PassWord').val();
+    var userToChange = $('#userId').val();
+
+    $.post({
+        url: url,
+        data: {
+            'email': user,
+            'password': pass,
+            'userToChange': userToChange
+        },
+        success: function (data) {
+            if (data == "True") {
+                loadDetails(userToChange); //instead of reloading URL, details of changed user will show
+                $('#delete-stop-credentialCheck').modal('hide');
+            } else {
+                $('#deleteStopMessage').text("You entered the wrong credentials. Please try again.").css("color", "red");
+                $('#delete-stop-credentialCheck').modal('show');
+            }
+        },
+        error: function () {
+            alert('fail');
+        }
+    });
+
+
 //  this is the ajax call that brings up more details about the user from the details link       
 function loadDetails(userId, firstName, lastName, edit = false) {
     if (!firstName == "") {

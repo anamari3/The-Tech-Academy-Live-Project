@@ -1,0 +1,42 @@
+    @*DATE PICKERS INPUT FORM AND PAY PERIOD DROPDOWN*@
+    <div>
+        @Html.HiddenFor(modelItem => Model.UserId)
+
+        @*DATE PICKERS*@
+        <div class="col-md-2" style="margin-bottom:5px" id="picker-start">
+            @Html.EditorFor(x => x.DisplayBeginDate, new { htmlAttributes = new { @class = "form-control", type = "date", onblur = "getWTEPartial()" } }) @*onblur can be updated to getWTEPartial()*@
+            @Html.ValidationMessageFor(x => x.DisplayBeginDate)
+
+        </div>
+
+        <div class="col-md-2" style="padding-bottom:5px" id="picker-end">
+            @Html.EditorFor(x => x.DisplayEndDate, new { htmlAttributes = new { @class = "form-control", type = "date", onblur = "getWTEPartial()" } })
+            @Html.ValidationMessageFor(x => x.DisplayEndDate)
+
+        </div>
+...
+
+<div id="work-time-partial-location">@{Html.RenderAction("WorkTimePartial");}</div> 
+
+...
+
+    //loads WorkTimeEventPartial
+    function getWTEPartial() {
+        var start = $('#picker-start').val();
+        var end = $('picker-end').val();
+        $.get({
+            'url': "@Url.Action("WorkTimePartial","WorkTimeEvent")", //(action name, controller name)
+            'data': {
+                start, end
+            },
+            'success': function (response) {
+                console.log("Success"); //confirmation that demonstrations the loaded partial
+                document.getElementById('work-time-partial-location').innerHTML = response;
+            },
+            'error': function () {
+                alert("An error Occurred.  Please try again or contact your system administrator.");
+            }
+        })
+
+    };
+
